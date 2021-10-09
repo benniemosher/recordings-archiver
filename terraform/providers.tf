@@ -6,6 +6,14 @@ terraform {
     }
   }
 
+  backend = "remote"
+  config = {
+    organization = "bam"
+    workspaces = {
+      name = "recordings-archiver"
+    }
+  }
+
   required_version = ">= 0.14.9"
 }
 
