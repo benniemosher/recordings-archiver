@@ -6,10 +6,11 @@ terraform {
     }
   }
 
-  backend = "remote"
-  config = {
+  backend "remote" {
+    hostname     = "app.terraform.io"
     organization = "bam"
-    workspaces = {
+
+    workspaces {
       name = "recordings-archiver"
     }
   }
