@@ -34,7 +34,7 @@ jobs:
       #     working_directory: terraform
 
       - name: tfsec
-        run: docker run --rm -it -v "$(pwd):/terraform" tfsec/tfsec /terraform
+        run: docker run --rm -v "$(pwd):/terraform" tfsec/tfsec /terraform
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
