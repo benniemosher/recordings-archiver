@@ -30,7 +30,8 @@ jobs:
       - name: tfsec
         uses: tfsec/tfsec-pr-commenter-action@main
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ github.token }}
+          working_directory: terraform
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
