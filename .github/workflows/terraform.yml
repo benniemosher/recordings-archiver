@@ -38,42 +38,6 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform -chdir=terraform plan -no-color
         continue-on-error: true
-
-      - name: Find Comment
-        uses: peter-evans/find-comment@v1
-        if: github.event_name == 'pull_request'
-        id: fc
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          comment-author: 'github-actions[bot]'
-          body-includes: Build output
-
-      - name: Create or update comment
-        uses: peter-evans/create-or-update-comment@v1
-        if: github.event_name == 'pull_request'
-        env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-        with:
-          comment-id: ${{ steps.fc.outputs.comment-id }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            #### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-            #### TFSec \`${{ steps.tfsec.outcome }}\`
-
-            <details><summary>Show Plan</summary>
-
-            \`\`\`\n
-            ${process.env.PLAN}
-            \`\`\`
-
-            </details>
-
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`
-          edit-mode: replace
-
       # TODO: Make this update the comment instead of make a new one
       # - name: Update Pull Request
       #   uses: actions/github-script@0.9.0
