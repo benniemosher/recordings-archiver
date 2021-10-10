@@ -83,6 +83,15 @@ resource "aws_kms_key" "lambdas-key" {
   enable_key_rotation     = true
 }
 
+resource "aws_s3_bucket_public_access_block" "lambdas-public-access-block" {
+  bucket = aws_s3_bucket.lambdas-bucket.id
+
+  restrict_public_buckets = true
+  ignore_public_acls      = true
+  block_public_acls       = true
+  block_public_policy     = true
+}
+
 resource "aws_s3_bucket" "lambdas-bucket" {
   bucket = "${var.project_name}-lambdas"
   acl           = "private"
