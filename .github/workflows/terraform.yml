@@ -27,6 +27,9 @@ jobs:
       - name: Terraform Validate
         id: validate
         run: terraform -chdir=terraform validate -no-color
+      - name: tflint
+        id: tflint
+        run: docker run --rm -v "$(pwd):/terraform" -t ghcr.io/terraform-linters/tflint /terraform
       - name: tfsec
         id: tfsec
         run: docker run --rm -v "$(pwd):/terraform" tfsec/tfsec /terraform
