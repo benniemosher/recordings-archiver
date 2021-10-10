@@ -93,7 +93,7 @@ resource "aws_s3_bucket_public_access_block" "lambdas-public-access-block" {
 }
 
 resource "aws_s3_bucket" "lambdas-bucket" {
-  bucket = "${var.project_name}-lambdas"
+  bucket        = "${var.project_name}-lambdas"
   acl           = "private"
   force_destroy = true
 

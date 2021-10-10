@@ -42,11 +42,11 @@ resource "aws_iam_role" "archive-raw-recordings" {
 
 data "aws_iam_policy_document" "archive-raw-recordings-assume-role" {
   statement {
-    actions = [ "sts:AssumeRole" ]
+    actions = ["sts:AssumeRole"]
 
     principals {
       type        = "Service"
-      identifiers = [ "lambda.amazonaws.com" ]
+      identifiers = ["lambda.amazonaws.com"]
     }
   }
 }
