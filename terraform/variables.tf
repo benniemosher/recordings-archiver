@@ -1,5 +1,5 @@
 variable "project_name" {
-  type = string
+  type    = string
   default = "recordings-archiver"
 }
 
