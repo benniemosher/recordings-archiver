@@ -51,6 +51,8 @@ jobs:
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
         if: github.event_name == 'pull_request'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
