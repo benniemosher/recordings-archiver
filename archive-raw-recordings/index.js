@@ -1,4 +1,4 @@
-module.exports.handler = async (event) => {
+export async function handler(event) {
   console.log('Event: ', event);
   let responseMessage = 'Hello, World!';
 
