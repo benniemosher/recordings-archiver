@@ -26,7 +26,7 @@ resource "aws_s3_bucket" "logging-bucket" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = aws_kms_key.raw_recordings_key.arn
+        kms_master_key_id = aws_kms_key.logging-key.arn
         sse_algorithm     = "aws:kms"
       }
     }
@@ -59,13 +59,13 @@ resource "aws_s3_bucket" "raw-recordings-bucket" {
 
   logging {
     target_bucket = aws_s3_bucket.logging-bucket.id
-    target_prefix = "${var.project-name}-raw-recordings-bucket-logs/"
+    target_prefix = "${var.project_name}-raw-recordings-bucket-logs/"
   }
 
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = aws_kms_key.raw_recordings_key.arn
+        kms_master_key_id = aws_kms_key.raw-recordings-key.arn
         sse_algorithm     = "aws:kms"
       }
     }
