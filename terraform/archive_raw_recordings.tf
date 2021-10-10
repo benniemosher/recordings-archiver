@@ -26,6 +26,12 @@ resource "aws_lambda_function" "archive-raw-recordings" {
   source_code_hash = data.archive_file.archive-raw-recordings.output_base64sha256
 
   role = aws_iam_role.archive-raw-recordings.arn
+
+  environment {
+    variables = {
+      zoomKey = var.zoom-key
+    }
+  }
 }
 
 resource "aws_cloudwatch_log_group" "archive-raw-recordings" {

@@ -3,6 +3,10 @@ variable "project_name" {
   default = "recordings-archiver"
 }
 
+variable "zoom-key" {
+  type = string
+}
+
 
 // variable "docker_ports" {
 //   type = list(object({
