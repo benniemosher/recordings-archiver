@@ -48,7 +48,7 @@ I would like all things to be:
 - Slack integration lambda?
 
 ## To run TF locally:
-- I use (aws-vault)[https://github.com/99designs/aws-vault] to manage my aws creds
+- I use [aws-vault](https://github.com/99designs/aws-vault) to manage my aws creds
 - I add these aliases to my shell profile:
 ```bash
 alias awsmoe='aws-vault exec moe -- aws'
