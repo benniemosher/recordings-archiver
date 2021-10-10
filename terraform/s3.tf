@@ -1,12 +1,12 @@
 # Logging bucket
-resource "aws_kms_key" "logging_key" {
+resource "aws_kms_key" "logging-key" {
   description             = "This key is used to encrypt logging bucket objects"
   deletion_window_in_days = 10
   enable_key_rotation     = true
 }
 
-resource "aws_s3_bucket_public_access_block" "logging_public_access_block" {
-  bucket = aws_s3_bucket.logging_bucket.id
+resource "aws_s3_bucket_public_access_block" "logging-public-access-block" {
+  bucket = aws_s3_bucket.logging-bucket.id
 
   restrict_public_buckets = true
   ignore_public_acls      = true
@@ -14,13 +14,13 @@ resource "aws_s3_bucket_public_access_block" "logging_public_access_block" {
   block_public_policy     = true
 }
 
-resource "aws_s3_bucket" "logging_bucket" {
-  bucket = "logging-bucket"
+resource "aws_s3_bucket" "logging-bucket" {
+  bucket = "${var.project_name}-logging-bucket"
   acl    = "log-delivery-write"
 
   logging {
-    target_bucket = "logging-bucket"
-    target_prefix = "loggings_logs/"
+    target_bucket = "${var.project_name}-logging-bucket"
+    target_prefix = "${var.project_name}-logging-logs/"
   }
 
   server_side_encryption_configuration {
@@ -38,14 +38,14 @@ resource "aws_s3_bucket" "logging_bucket" {
 }
 
 # Raw Recordings bucket
-resource "aws_kms_key" "raw_recordings_key" {
-  description             = "This key is used to encrypt raw_recordings bucket objects"
+resource "aws_kms_key" "raw-recordings-key" {
+  description             = "This key is used to encrypt raw-recordings bucket objects"
   deletion_window_in_days = 10
   enable_key_rotation     = true
 }
 
-resource "aws_s3_bucket_public_access_block" "raw_recordings_public_access_block" {
-  bucket = aws_s3_bucket.raw_recordings_bucket.id
+resource "aws_s3_bucket_public_access_block" "raw-recordings-public-access-block" {
+  bucket = aws_s3_bucket.raw-recordings-bucket.id
 
   restrict_public_buckets = true
   ignore_public_acls      = true
@@ -53,13 +53,13 @@ resource "aws_s3_bucket_public_access_block" "raw_recordings_public_access_block
   block_public_policy     = true
 }
 
-resource "aws_s3_bucket" "raw_recordings_bucket" {
-  bucket = "raw_recordings"
+resource "aws_s3_bucket" "raw-recordings-bucket" {
+  bucket = "${var.project_name}-raw-recordings"
   acl    = "private"
 
   logging {
-    target_bucket = aws_s3_bucket.logging_bucket.id
-    target_prefix = "raw_recordings_s3_bucket_logs/"
+    target_bucket = aws_s3_bucket.logging-bucket.id
+    target_prefix = "${var.project-name}-raw-recordings-bucket-logs/"
   }
 
   server_side_encryption_configuration {

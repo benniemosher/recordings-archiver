@@ -55,3 +55,37 @@ alias awsmoe='aws-vault exec moe -- aws'
 alias tfmoe='export AWS_ACCESS_KEY_ID="<access_key_id>"; export AWS_SECRET_ACCESS_KEY="<secret_acess_key_id>"; tf'
 ```
 - I can then run commands like `awsmoe s3 ls` or `tfmoe plan`
+
+## Quality checks
+
+Each PR is ran against a slew of different checks to ensure quality code. To run those checks locally run one of the following commands.
+
+### `terraform fmt`
+
+```bash
+terraform -chdir=terraform fmt -check
+```
+
+### `terraform validate`
+
+```bash
+terraform -chdir=terraform validate -no-color
+```
+
+### `tflint`
+
+```bash
+docker run --rm -v "$(pwd):/terraform" -t ghcr.io/terraform-linters/tflint /terraform
+```
+
+### `tfsec`
+
+```bash
+docker run --rm -v "$(pwd):/terraform" tfsec/tfsec /terraform
+```
+
+### `terraform plan`
+
+```bash
+terraform -chdir=terraform plan -no-color
+```
