@@ -25,7 +25,7 @@ resource "aws_lambda_function" "archive-raw-recordings" {
 
   source_code_hash = data.archive_file.archive-raw-recordings.output_base64sha256
 
-  role = aws_iam_arole.lambda_exec.arn
+  role = aws_iam_role.archive-raw-recordings.arn
 }
 
 resource "aws_cloudwatch_log_group" "archive-raw-recordings" {
@@ -37,7 +37,7 @@ resource "aws_cloudwatch_log_group" "archive-raw-recordings" {
 resource "aws_iam_role" "archive-raw-recordings" {
   name = "archive-raw-recordings-lambda"
 
-  assume_role_policy = data.aws_iam_policy_document.lambda-assume-role.json
+  assume_role_policy = data.aws_iam_policy_document.archive-raw-recordings-assume-role.json
 }
 
 data "aws_iam_policy_document" "archive-raw-recordings-assume-role" {
