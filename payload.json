@@ -1,0 +1,35 @@
+{
+  "event": "string",
+  "event_ts": "long",
+  "payload": {
+    "account_id": "string",
+    "object": {
+      "id": "integer",
+      "uuid": "string",
+      "host_id": "string",
+      "topic": "string",
+      "type": "integer",
+      "start_time": "string",
+      "timezone": "string",
+      "host_email": "string",
+      "duration": "integer",
+      "share_url": "string",
+      "total_size": "integer",
+      "recording_count": "integer",
+      "recording_files": [
+        {
+          "id": "string",
+          "meeting_id": "string",
+          "recording_start": "string",
+          "recording_end": "string",
+          "file_type": "string",
+          "file_size": "number",
+          "play_url": "string",
+          "download_url": "string",
+          "status": "string",
+          "recording_type": "string"
+        }
+      ]
+    }
+  }
+}
